@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>智慧学工 · 用章申请系统</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:#f0f2f5;color:#1e293b;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px}
+h1{font-size:28px;font-weight:700;margin-bottom:8px;letter-spacing:-.02em}
+.subtitle{font-size:15px;color:#64748b;margin-bottom:48px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:1000px;width:100%}
+.card{background:#fff;border-radius:12px;padding:32px;box-shadow:0 1px 3px rgba(0,0,0,.08);border:1px solid #e2e8f0;transition:box-shadow .2s}
+.card:hover{box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.card h2{font-size:18px;font-weight:600;margin-bottom:6px;color:#0f172a}
+.card p{font-size:13px;color:#64748b;line-height:1.6;margin-bottom:20px}
+.card-links{display:flex;flex-direction:column;gap:10px}
+.card-links a{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;background:#f8fafc;border:1px solid #e2e8f0;text-decoration:none;color:#1e293b;font-size:13.5px;font-weight:500;transition:all .15s}
+.card-links a:hover{background:#eef2ff;border-color:#c7d2fe;color:#4f46e5}
+.card-links a .icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.card-links a .label-sub{font-size:11.5px;color:#94a3b8;font-weight:400;margin-top:1px}
+.tag{display:inline-block;font-size:10.5px;padding:2px 6px;border-radius:4px;font-weight:500;margin-left:6px;vertical-align:middle}
+.tag-pc{background:#dbeafe;color:#2563eb}
+.tag-mobile{background:#fce7f3;color:#db2777}
+.ic-admin{background:#eef2ff;color:#4f46e5}
+.ic-apply{background:#ecfdf5;color:#059669}
+.ic-approval{background:#fffbeb;color:#d97706}
+.footer{margin-top:60px;font-size:12px;color:#94a3b8}
+</style>
+</head>
+<body>
+
+<h1>智慧学工 · 用章申请系统</h1>
+<p class="subtitle">完整原型导航 — PC端统一工作台 + 移动端申请/审批</p>
+
+<div class="cards">
+
+  <div class="card">
+    <h2>PC 工作台</h2>
+    <p>申请、审批、管理一站式操作。统一左侧导航，涵盖用印申请、我的申请、待审批、已审批、数据概览、申请记录、系统设置。</p>
+    <div class="card-links">
+      <a href="apply-pc/01-apply-form.html">
+        <span class="icon ic-apply">📝</span>
+        <span>
+          用印申请<span class="tag tag-pc">PC</span>
+          <br><span class="label-sub">新建用章申请表单</span>
+        </span>
+      </a>
+      <a href="apply-pc/02-my-applications.html">
+        <span class="icon ic-apply">📄</span>
+        <span>
+          我的申请<span class="tag tag-pc">PC</span>
+          <br><span class="label-sub">申请列表 → 申请详情（含状态跟踪）</span>
+        </span>
+      </a>
+      <a href="approval-pc/01-pending-list.html">
+        <span class="icon ic-approval">⏳</span>
+        <span>
+          待审批<span class="tag tag-pc">PC</span>
+          <br><span class="label-sub">审批列表 → 审批详情 → 通过/驳回</span>
+        </span>
+      </a>
+      <a href="admin/01-dashboard.html">
+        <span class="icon ic-admin">📊</span>
+        <span>
+          后台管理<span class="tag tag-pc">PC</span>
+          <br><span class="label-sub">数据概览 → 申请记录 → 系统设置</span>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>移动端申请</h2>
+    <p>面向全校师生的移动端用章申请，底部 Tab 切换用印申请和我的申请，支持申请详情查看与状态跟踪。</p>
+    <div class="card-links">
+      <a href="apply-mobile/01-apply-form.html">
+        <span class="icon ic-apply">📱</span>
+        <span>
+          用印申请<span class="tag tag-mobile">移动端</span>
+          <br><span class="label-sub">申请表单 → 提交成功 → 申请详情（4页）</span>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>移动端审批</h2>
+    <p>面向辅导员/副书记/学工部负责人的移动端审批工具，支持待办处理与历史查看。</p>
+    <div class="card-links">
+      <a href="approval-mobile/01-pending-list.html">
+        <span class="icon ic-approval">📱</span>
+        <span>
+          审批任务<span class="tag tag-mobile">移动端</span>
+          <br><span class="label-sub">待办任务 → 任务详情 → 已办任务（5页）</span>
+        </span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<p class="footer">用章申请系统原型 v1.0 · 智慧学工业务助手 · 共 25 个页面</p>
+
+</body>
+</html>

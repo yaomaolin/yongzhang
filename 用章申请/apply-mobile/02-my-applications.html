@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>我的申请 - 智慧学工</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f5f5;color:#1e293b;max-width:375px;margin:0 auto;min-height:100vh;padding-bottom:60px}
+a{text-decoration:none;color:inherit}
+.header{background:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #f0f0f0;position:sticky;top:0;z-index:50}
+.header .back{font-size:18px;color:#64748b}
+.header h1{font-size:16px;font-weight:600;flex:1}
+
+.search-bar{background:#fff;padding:12px 16px;margin-bottom:8px}
+.search-bar input{width:100%;padding:9px 12px 9px 32px;border:1px solid #e2e8f0;border-radius:8px;font-size:13.5px;font-family:inherit;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E") no-repeat 10px center}
+.search-bar input:focus{border-color:#d97706;outline:none;box-shadow:0 0 0 2px rgba(217,119,6,0.1)}
+
+.card-list{padding:0 12px}
+.app-card{display:block;background:#fff;border-radius:10px;padding:14px;margin-bottom:10px;border:1px solid #e2e8f0}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.card-title{font-size:15px;font-weight:600;flex:1;line-height:1.4}
+.card-badge{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;white-space:nowrap;margin-left:8px}
+.card-badge.reviewing{background:#fffbeb;color:#d97706}
+.card-badge.passed{background:#ecfdf5;color:#059669}
+.card-badge.rejected{background:#fef2f2;color:#dc2626}
+.card-badge.done{background:#f0f9ff;color:#0284c7}
+
+.card-info{font-size:12.5px;color:#64748b;line-height:2}
+.card-info span{display:block}
+.card-info .info-label{color:#94a3b8;display:inline;margin-right:4px}
+
+.card-footer{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid #f1f5f9}
+.card-time{font-size:11.5px;color:#94a3b8}
+.card-action{font-size:12.5px;color:#d97706;font-weight:500}
+
+.page-nav{display:flex;align-items:center;justify-content:center;gap:16px;padding:16px 0;font-size:13px;color:#94a3b8}
+.page-nav .arrow{width:32px;height:32px;border:1px solid #e2e8f0;border-radius:8px;display:flex;align-items:center;justify-content:center;background:#fff;font-size:14px;color:#94a3b8}
+.tab-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:375px;background:#fff;border-top:1px solid #e5e7eb;display:flex;padding:6px 0 env(safe-area-inset-bottom,8px);z-index:50}
+.tab-bar a{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:#94a3b8;padding:4px 0}
+.tab-bar a.active{color:#d97706}
+.tab-bar a .ticon{font-size:18px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="back" href="../index.html">←</a>
+  <h1>我的申请</h1>
+</div>
+
+<div class="search-bar">
+  <input type="text" placeholder="搜索盖章内容">
+</div>
+
+<div class="card-list">
+  <a class="app-card" href="03-application-detail.html">
+    <div class="card-top">
+      <span class="card-title">2025-2026学年优秀学生奖状</span>
+      <span class="card-badge reviewing">审批中</span>
+    </div>
+    <div class="card-info">
+      <span><span class="info-label">用印单位</span>计算机学院</span>
+      <span><span class="info-label">份数</span>120份</span>
+      <span><span class="info-label">当前节点</span>辅导员审批</span>
+    </div>
+    <div class="card-footer"><span class="card-time">2026-04-15 14:30</span><span class="card-action">查看详情 →</span></div>
+  </a>
+
+  <a class="app-card" href="03-application-detail.html">
+    <div class="card-top">
+      <span class="card-title">社会实践证明</span>
+      <span class="card-badge reviewing">审批中</span>
+    </div>
+    <div class="card-info">
+      <span><span class="info-label">用印单位</span>计算机学院</span>
+      <span><span class="info-label">份数</span>30份</span>
+      <span><span class="info-label">当前节点</span>学工部审批</span>
+    </div>
+    <div class="card-footer"><span class="card-time">2026-04-10 09:20</span><span class="card-action">查看详情 →</span></div>
+  </a>
+
+  <a class="app-card" href="04-approved-detail.html">
+    <div class="card-top">
+      <span class="card-title">学生会活动通知</span>
+      <span class="card-badge passed">已通过</span>
+    </div>
+    <div class="card-info">
+      <span><span class="info-label">用印单位</span>计算机学院</span>
+      <span><span class="info-label">份数</span>1份</span>
+      <span><span class="info-label">当前节点</span>审批完成</span>
+    </div>
+    <div class="card-footer"><span class="card-time">2026-04-05 16:00</span><span class="card-action">查看详情 →</span></div>
+  </a>
+
+  <a class="app-card" href="03-application-detail.html">
+    <div class="card-top">
+      <span class="card-title">志愿服务证明</span>
+      <span class="card-badge rejected">不通过</span>
+    </div>
+    <div class="card-info">
+      <span><span class="info-label">用印单位</span>计算机学院</span>
+      <span><span class="info-label">份数</span>50份</span>
+      <span><span class="info-label">当前节点</span>副书记审批</span>
+    </div>
+    <div class="card-footer"><span class="card-time">2026-03-28 14:10</span><span class="card-action">查看详情 →</span></div>
+  </a>
+
+  <a class="app-card" href="04-approved-detail.html">
+    <div class="card-top">
+      <span class="card-title">奖学金证明</span>
+      <span class="card-badge done">已完成</span>
+    </div>
+    <div class="card-info">
+      <span><span class="info-label">用印单位</span>计算机学院</span>
+      <span><span class="info-label">份数</span>5份</span>
+      <span><span class="info-label">当前节点</span>审批完成</span>
+    </div>
+    <div class="card-footer"><span class="card-time">2026-03-20 10:30</span><span class="card-action">查看详情 →</span></div>
+  </a>
+</div>
+
+<div class="page-nav">
+  <span class="arrow">←</span>
+  <span>1 / 1</span>
+  <span class="arrow">→</span>
+</div>
+
+<nav class="tab-bar">
+  <a href="01-apply-form.html"><span class="ticon">📝</span>用印申请</a>
+  <a class="active" href="02-my-applications.html"><span class="ticon">📄</span>我的申请</a>
+</nav>
+
+</body>
+</html>

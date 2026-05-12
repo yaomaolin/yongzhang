@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>系统设置 - 用章申请后台</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:#f8fafc;color:#0f172a;display:flex;min-height:100vh}
+a{text-decoration:none;color:inherit}
+.sidebar{width:220px;background:#fff;border-right:1px solid #e2e8f0;position:fixed;top:0;left:0;bottom:0;display:flex;flex-direction:column;z-index:100}
+.sidebar-brand{height:56px;display:flex;align-items:center;gap:10px;padding:0 20px;border-bottom:1px solid #e2e8f0;font-weight:600;font-size:15px}
+.sidebar-brand .logo{width:28px;height:28px;border-radius:7px;background:#d97706;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.sidebar-nav{flex:1;padding:12px 8px;overflow-y:auto}
+.nav-item{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:6px;font-size:13.5px;color:#64748b;margin-bottom:2px;transition:all .15s}
+.nav-item:hover{background:#f1f5f9;color:#0f172a}
+.nav-item.active{background:#fffbeb;color:#d97706;font-weight:500}
+.nav-icon{width:20px;text-align:center;font-size:15px}
+.nav-section{font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;padding:12px 12px 4px;margin-top:4px}
+.sidebar-footer{padding:12px 20px;border-top:1px solid #e2e8f0;font-size:12px}
+.sidebar-footer a{color:#64748b;font-size:12px}
+.sidebar-footer a:hover{color:#d97706}
+.main{margin-left:220px;flex:1;min-width:0}
+.topbar{height:56px;background:#fff;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:50}
+.topbar-title{font-size:15px;font-weight:600}
+.topbar-user{font-size:13px;color:#64748b}
+.content{padding:24px 28px 48px;max-width:880px}
+
+.section{background:#fff;border-radius:10px;border:1px solid #e2e8f0;padding:24px;margin-bottom:20px}
+.section h3{font-size:15px;font-weight:600;margin-bottom:6px}
+.section .desc{font-size:12.5px;color:#64748b;margin-bottom:16px;line-height:1.6}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:7px 16px;border-radius:8px;font-size:13px;font-weight:500;border:1px solid transparent;cursor:pointer;font-family:inherit;transition:all .15s}
+.btn-outline{background:#fff;color:#d97706;border-color:#d97706}
+.btn-outline:hover{background:#fffbeb}
+.btn-secondary{background:#fff;color:#64748b;border-color:#e2e8f0}
+.btn-secondary:hover{background:#f8fafc}
+.btn-danger-outline{background:#fff;color:#dc2626;border-color:#dc2626}
+.btn-danger-outline:hover{background:#fef2f2}
+
+table{width:100%;border-collapse:collapse}
+th,td{padding:10px 12px;text-align:left;font-size:13px;border-bottom:1px solid #f1f5f9}
+th{font-weight:500;color:#64748b;font-size:12px;background:#f8fafc}
+.badge{display:inline-block;font-size:11.5px;padding:2px 8px;border-radius:10px;font-weight:500}
+.badge-success{background:#ecfdf5;color:#059669}
+.badge-disabled{background:#f1f5f9;color:#94a3b8}
+.action-link{font-size:12.5px;color:#d97706;cursor:pointer}
+.action-link:hover{text-decoration:underline}
+
+/* Seal info */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.info-row{display:flex;padding:12px 0;border-bottom:1px solid #f1f5f9}
+.info-row:last-child{border-bottom:none}
+.info-label{width:90px;flex-shrink:0;font-size:13px;color:#64748b}
+.info-value{font-size:13px;font-weight:500}
+.info-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.info-card-head h3{margin-bottom:0}
+.edit-link{font-size:12.5px;color:#d97706;cursor:pointer}
+.edit-link:hover{text-decoration:underline}
+
+/* Toggle */
+.toggle-list{margin-top:12px}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid #f1f5f9}
+.toggle-row:last-child{border-bottom:none}
+.toggle-label{font-size:13.5px}
+.toggle-label .toggle-hint{font-size:11.5px;color:#94a3b8;margin-top:2px}
+.toggle-switch{width:40px;height:22px;border-radius:11px;background:#059669;position:relative;flex-shrink:0;cursor:pointer}
+.toggle-switch::after{content:'';position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1);transition:all .2s}
+.toggle-switch.off{background:#cbd5e1}
+.toggle-switch.off::after{right:auto;left:2px}
+
+/* Approval chain arrow */
+.chain-nodes{display:flex;align-items:center;gap:4px;font-size:12.5px;flex-wrap:wrap}
+.chain-node{background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:3px 10px;font-size:11.5px;font-weight:500}
+.chain-tag{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:4px;background:#d97706;color:#fff;font-size:10px;font-weight:700;flex-shrink:0}
+.chain-arrow{color:#94a3b8;font-size:12px}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-brand"><div class="logo">章</div>智慧学工 · 用章</div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">申请</div>
+    <a class="nav-item" href="../apply-pc/01-apply-form.html"><span class="nav-icon">📝</span>用印申请</a>
+    <a class="nav-item" href="../apply-pc/02-my-applications.html"><span class="nav-icon">📄</span>我的申请</a>
+    <div class="nav-section">审批</div>
+    <a class="nav-item" href="../approval-pc/01-pending-list.html"><span class="nav-icon">⏳</span>待审批</a>
+    <a class="nav-item" href="../approval-pc/05-history.html"><span class="nav-icon">✅</span>已审批</a>
+    <div class="nav-section">管理</div>
+    <a class="nav-item" href="01-dashboard.html"><span class="nav-icon">📊</span>数据概览</a>
+    <a class="nav-item" href="02-application-list.html"><span class="nav-icon">📋</span>申请记录</a>
+    <a class="nav-item active" href="03-settings.html"><span class="nav-icon">⚙</span>系统设置</a>
+  </nav>
+  <div class="sidebar-footer"><a href="../index.html">← 返回首页</a></div>
+</aside>
+
+<div class="main">
+  <header class="topbar">
+    <span class="topbar-title">系统设置</span>
+    <span class="topbar-user">管理员：陈主任（学工部）</span>
+  </header>
+  <div class="content">
+
+    <!-- Section 1: 印章管理 -->
+    <div class="section">
+      <div class="info-card-head">
+        <h3>印章管理</h3>
+        <a class="btn btn-outline" href="04-seal-form.html">+ 添加印章</a>
+      </div>
+      <div class="desc">管理各部门可用印章及其审批流程。每枚印章可独立配置不同角色的审批链路。</div>
+      <table>
+        <thead>
+          <tr><th>印章名称</th><th>所属部门</th><th>印章位置</th><th>管理员</th><th>审批链路</th><th>状态</th><th>操作</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-weight:500">学生工作部公章</td>
+            <td>学工部</td>
+            <td>行政楼 B 座 302</td>
+            <td>陈主任</td>
+            <td>
+              <div class="chain-nodes">
+                <span class="chain-tag">A</span>
+                <span class="chain-node">辅导员→副书记→学工部</span>
+              </div>
+              <div class="chain-nodes" style="margin-top:4px">
+                <span class="chain-tag">B</span>
+                <span class="chain-node">副书记→学工部</span>
+              </div>
+            </td>
+            <td><span class="badge badge-success">启用</span></td>
+            <td><a class="action-link" href="04-seal-form.html">编辑</a> <a class="action-link" style="color:#dc2626;margin-left:8px">停用</a></td>
+          </tr>
+          <tr>
+            <td style="font-weight:500">计算机学院公章</td>
+            <td>计算机学院</td>
+            <td>计算机楼 5 楼 507</td>
+            <td>刘院长</td>
+            <td>
+              <div class="chain-nodes">
+                <span class="chain-tag">A</span>
+                <span class="chain-node">辅导员→副书记→学工部</span>
+              </div>
+              <div class="chain-nodes" style="margin-top:4px">
+                <span class="chain-tag">B</span>
+                <span class="chain-node">副书记→学工部</span>
+              </div>
+            </td>
+            <td><span class="badge badge-success">启用</span></td>
+            <td><a class="action-link" href="04-seal-form.html">编辑</a> <a class="action-link" style="color:#dc2626;margin-left:8px">停用</a></td>
+          </tr>
+          <tr>
+            <td style="font-weight:500">文学院公章</td>
+            <td>文学院</td>
+            <td>文科楼 A 座 201</td>
+            <td>王院长</td>
+            <td>
+              <div class="chain-nodes">
+                <span class="chain-tag">A</span>
+                <span class="chain-node">辅导员→副书记→学工部</span>
+              </div>
+            </td>
+            <td><span class="badge badge-success">启用</span></td>
+            <td><a class="action-link" href="04-seal-form.html">编辑</a> <a class="action-link" style="color:#dc2626;margin-left:8px">停用</a></td>
+          </tr>
+          <tr>
+            <td style="font-weight:500">自动化学院公章</td>
+            <td>自动化学院</td>
+            <td>工程楼 3 楼 305</td>
+            <td>赵院长</td>
+            <td>
+              <div class="chain-nodes">
+                <span class="chain-tag">A</span>
+                <span class="chain-node">辅导员→副书记→学工部</span>
+              </div>
+              <div class="chain-nodes" style="margin-top:4px">
+                <span class="chain-tag">D</span>
+                <span class="chain-node">部门领导→学工部</span>
+              </div>
+            </td>
+            <td><span class="badge badge-success">启用</span></td>
+            <td><a class="action-link" href="04-seal-form.html">编辑</a> <a class="action-link" style="color:#dc2626;margin-left:8px">停用</a></td>
+          </tr>
+          <tr>
+            <td style="font-weight:500">数学学院公章</td>
+            <td>数学学院</td>
+            <td>理科楼 4 楼 408</td>
+            <td>孙院长</td>
+            <td>
+              <div class="chain-nodes">
+                <span class="chain-tag">A</span>
+                <span class="chain-node">辅导员→副书记→学工部</span>
+              </div>
+            </td>
+            <td><span class="badge badge-success">启用</span></td>
+            <td><a class="action-link" href="04-seal-form.html">编辑</a> <a class="action-link" style="color:#dc2626;margin-left:8px">停用</a></td>
+          </tr>
+          <tr>
+            <td style="font-weight:500">校团委公章</td>
+            <td>校团委</td>
+            <td>学生活动中心 2 楼 205</td>
+            <td>周书记</td>
+            <td>
+              <div class="chain-nodes"><span style="color:#94a3b8;font-size:12px">未配置</span></div>
+            </td>
+            <td><span class="badge badge-disabled">停用</span></td>
+            <td><a class="action-link" href="04-seal-form.html">编辑</a> <a class="action-link" style="color:#059669;margin-left:8px">启用</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Section 3: 通知设置 -->
+    <div class="section">
+      <h3>通知设置</h3>
+      <div class="desc">配置各类通知的开启与关闭。</div>
+      <div class="toggle-list">
+        <div class="toggle-row">
+          <div class="toggle-label">申请提交通知</div>
+          <div class="toggle-switch"></div>
+        </div>
+        <div class="toggle-row">
+          <div class="toggle-label">审批结果通知</div>
+          <div class="toggle-switch"></div>
+        </div>
+        <div class="toggle-row">
+          <div class="toggle-label">驳回通知</div>
+          <div class="toggle-switch"></div>
+        </div>
+        <div class="toggle-row">
+          <div class="toggle-label">
+            审批超时提醒
+            <div class="toggle-hint">超过 24 小时未审批时提醒</div>
+          </div>
+          <div class="toggle-switch"></div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+
+</body>
+</html>
