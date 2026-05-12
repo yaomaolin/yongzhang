@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>心理培训中心 · 工作台</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+/* 心理培训中心 · PC 端公共样式（中南主色体系 · 学工 Design System） */
+
+:root {
+  --color-primary: #3087CC;
+  --color-primary-light: #E3F1F9;
+  --color-primary-dark: #006DAD;
+  --color-primary-border: #BADEF3;
+  --color-text-primary: #3C444F;
+  --color-text-secondary: #696F7D;
+  --color-text-muted: #9096A2;
+  --color-text-placeholder: #ABB0BA;
+  --color-border: #C8CAD1;
+  --color-border-light: #ECEFF4;
+  --color-bg-page: #F5F7FA;
+  --color-bg-card: #FFFFFF;
+  --color-success: #1BB975;
+  --color-success-light: #E8FCF4;
+  --color-success-border: #A7F3D0;
+  --color-warning: #F29100;
+  --color-warning-light: #FFF5E5;
+  --color-warning-border: #FFE0B3;
+  --color-danger: #DF2027;
+  --color-danger-light: #FCE8EA;
+  --color-danger-border: #F6BCBE;
+  --color-disabled: #ABB0BA;
+  --color-disabled-light: #F1F2F3;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --sidebar-width: 220px;
+  --header-height: 56px;
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease-in-out;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: 'OPPOSans', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  color: var(--color-text-primary);
+  background: var(--color-bg-page);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* ===== 全局布局 ===== */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ===== 侧边栏 ===== */
+.sidebar {
+  width: var(--sidebar-width);
+  background: #fff;
+  border-right: 1px solid var(--color-border-light);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 30;
+  overflow-y: auto;
+}
+.sidebar-logo {
+  height: var(--header-height);
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--color-border-light);
+  flex-shrink: 0;
+}
+.sidebar-logo .logo-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #3087CC, #006DAD);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.sidebar-logo .logo-text {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+.sidebar-nav {
+  flex: 1;
+  padding: 12px 8px;
+}
+.nav-group-label {
+  padding: 10px 12px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-bottom: 2px;
+  position: relative;
+}
+.nav-item:hover {
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
+}
+.nav-item.active {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-weight: 500;
+}
+.nav-item .icon {
+  width: 20px;
+  text-align: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.nav-item .badge {
+  margin-left: auto;
+  background: var(--color-danger);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 10px;
+  line-height: 1.4;
+}
+.sidebar-footer {
+  padding: 12px 16px;
+  border-top: 1px solid var(--color-border-light);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* ===== 主区域 ===== */
+.main-area {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===== 顶部栏 ===== */
+.top-header {
+  height: var(--header-height);
+  background: #fff;
+  border-bottom: 1px solid var(--color-border-light);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.top-header .breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+.top-header .breadcrumb a { color: var(--color-text-muted); transition: color var(--transition-fast); }
+.top-header .breadcrumb a:hover { color: var(--color-primary); }
+.top-header .breadcrumb .current { color: var(--color-text-primary); font-weight: 500; }
+.top-header .spacer { flex: 1; }
+.header-action {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+.header-action:hover { background: var(--color-bg-page); color: var(--color-text-primary); }
+.header-action .dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-danger);
+  border: 1.5px solid #fff;
+}
+.user-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px 4px 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+.user-chip:hover { background: var(--color-bg-page); }
+.user-chip img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.user-chip .name { font-size: 13px; font-weight: 500; }
+.user-chip .role { font-size: 11px; color: var(--color-text-muted); }
+
+/* 搜索框 */
+.search-box {
+  position: relative;
+  width: 260px;
+}
+.search-box i {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+.search-box input {
+  width: 100%;
+  height: 36px;
+  padding: 0 12px 0 32px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border-light);
+  background: var(--color-bg-page);
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--color-text-primary);
+  outline: none;
+  transition: all var(--transition-fast);
+}
+.search-box input:focus {
+  border-color: var(--color-primary);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(48, 135, 204, 0.1);
+}
+
+/* ===== 页面内容区 ===== */
+.page-content {
+  flex: 1;
+  padding: 24px;
+  max-width: 1200px;
+}
+.page-content.wide { max-width: 100%; }
+
+/* 页面头 */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+.page-header .left { display: flex; flex-direction: column; gap: 4px; }
+.page-title { font-size: 20px; font-weight: 600; color: var(--color-text-primary); }
+.page-desc { font-size: 13px; color: var(--color-text-muted); }
+.page-header .actions { display: flex; align-items: center; gap: 8px; }
+
+/* ===== 卡片 ===== */
+.card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+}
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-title .extra {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+/* ===== 统计卡片 ===== */
+.stat-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.stat-card .stat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #fff;
+  flex-shrink: 0;
+}
+.stat-card .stat-info { flex: 1; }
+.stat-card .stat-label { font-size: 13px; color: var(--color-text-muted); }
+.stat-card .stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+  margin-top: 2px;
+}
+.stat-card .stat-change {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+/* ===== 数据表格 ===== */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.data-table thead {
+  background: var(--color-primary-light);
+}
+.data-table th {
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  border-bottom: 1px solid var(--color-border-light);
+}
+.data-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--color-border-light);
+  vertical-align: middle;
+}
+.data-table tbody tr {
+  transition: background var(--transition-fast);
+}
+.data-table tbody tr:hover {
+  background: #FAFBFD;
+}
+.data-table tbody tr:last-child td { border-bottom: none; }
+
+/* ===== 标签 Tag ===== */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.tag-primary { background: var(--color-primary-light); color: var(--color-primary); }
+.tag-success { background: var(--color-success-light); color: var(--color-success); border: 1px solid var(--color-success-border); }
+.tag-warning { background: var(--color-warning-light); color: var(--color-warning); border: 1px solid var(--color-warning-border); }
+.tag-danger  { background: var(--color-danger-light); color: var(--color-danger); border: 1px solid var(--color-danger-border); }
+.tag-muted   { background: var(--color-disabled-light); color: var(--color-text-secondary); border: 1px solid var(--color-border); }
+
+/* ===== 按钮 ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  border: 1px solid transparent;
+  font-family: inherit;
+}
+.btn:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+.btn-primary { background: var(--color-primary); color: #fff; }
+.btn-primary:hover { background: var(--color-primary-dark); }
+.btn-secondary { background: #fff; color: var(--color-primary); border-color: var(--color-primary); }
+.btn-secondary:hover { background: var(--color-primary-light); }
+.btn-ghost { background: var(--color-disabled-light); color: var(--color-text-primary); }
+.btn-ghost:hover { background: #E4E6EA; }
+.btn-danger { background: var(--color-danger); color: #fff; }
+.btn-danger:hover { background: #C41A20; }
+.btn-text { background: none; color: var(--color-primary); padding: 0 8px; height: auto; }
+.btn-text:hover { text-decoration: underline; }
+.btn-block { width: 100%; }
+.btn-sm { height: 30px; padding: 0 10px; font-size: 13px; border-radius: 6px; }
+.btn-lg { height: 42px; padding: 0 20px; font-size: 15px; }
+.btn[disabled] { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+
+/* ===== 表单 ===== */
+.form-group { margin-bottom: 16px; }
+.form-label {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-bottom: 6px;
+  display: block;
+  font-weight: 500;
+}
+.form-label .req { color: var(--color-danger); margin-right: 2px; }
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: #fff;
+  font-size: 14px;
+  color: var(--color-text-primary);
+  font-family: inherit;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+.form-input::placeholder,
+.form-textarea::placeholder { color: var(--color-text-placeholder); }
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(48, 135, 204, 0.1);
+}
+.form-textarea { height: auto; padding: 10px 12px; min-height: 80px; resize: vertical; }
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239096A2' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+.form-hint { font-size: 12px; color: var(--color-text-muted); margin-top: 4px; }
+.form-row-inline { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* ===== 开关 ===== */
+.switch { position: relative; display: inline-block; width: 40px; height: 22px; flex-shrink: 0; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.switch .slider {
+  position: absolute; cursor: pointer; inset: 0;
+  background: #C8CAD1; border-radius: 22px; transition: 200ms;
+}
+.switch .slider::before {
+  position: absolute; content: '';
+  height: 18px; width: 18px; left: 2px; bottom: 2px;
+  background: #fff; border-radius: 50%; transition: 200ms;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+.switch input:checked + .slider { background: var(--color-primary); }
+.switch input:checked + .slider::before { transform: translateX(18px); }
+
+/* ===== 复选/单选 ===== */
+.checkbox, .radio {
+  width: 18px; height: 18px;
+  border: 1.5px solid var(--color-border);
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0; cursor: pointer; transition: all var(--transition-fast);
+}
+.checkbox { border-radius: 4px; }
+.radio { border-radius: 50%; }
+.checkbox.checked, .radio.checked { background: var(--color-primary); border-color: var(--color-primary); }
+.checkbox.checked::after {
+  content: ''; width: 4px; height: 8px; border: solid #fff;
+  border-width: 0 2px 2px 0; transform: rotate(45deg) translate(-1px, -1px);
+}
+.radio.checked { background: #fff; border-color: var(--color-primary); border-width: 5px; }
+
+/* ===== 进度条 ===== */
+.progress { width: 100%; height: 8px; background: var(--color-disabled-light); border-radius: 10px; overflow: hidden; }
+.progress .bar { height: 100%; background: var(--color-primary); border-radius: 10px; transition: width 300ms; }
+
+/* ===== 头像 ===== */
+.avatar { border-radius: 50%; object-fit: cover; flex-shrink: 0; background: var(--color-disabled-light); }
+
+/* ===== 上传区 ===== */
+.uploader {
+  border: 1.5px dashed var(--color-border);
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  background: #FAFBFD;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.uploader:hover { border-color: var(--color-primary); background: var(--color-primary-light); }
+.uploader .icon {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--color-primary-light); color: var(--color-primary);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 10px; font-size: 18px;
+}
+
+/* ===== 分段控件 ===== */
+.seg-control {
+  background: #E9ECF1;
+  padding: 3px;
+  border-radius: 8px;
+  display: inline-flex;
+}
+.seg-control button {
+  height: 30px;
+  padding: 0 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: all 200ms ease;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+.seg-control button.active {
+  background: #fff;
+  color: var(--color-text-primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== Tab Bar ===== */
+.tab-bar {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--color-border-light);
+  margin-bottom: 16px;
+}
+.tab-bar .tab {
+  padding: 8px 14px;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  position: relative;
+  transition: color var(--transition-fast);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.tab-bar .tab:hover { color: var(--color-text-primary); }
+.tab-bar .tab.active {
+  color: var(--color-primary);
+  font-weight: 600;
+  border-bottom-color: var(--color-primary);
+}
+
+/* ===== 工具栏 ===== */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.toolbar .spacer { flex: 1; }
+.filter-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 5px 12px; border-radius: 14px;
+  background: #fff; color: var(--color-text-secondary);
+  font-size: 13px; border: 1px solid var(--color-border-light);
+  cursor: pointer; transition: all var(--transition-fast);
+}
+.filter-pill:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.filter-pill.active { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+
+/* ===== 底部操作栏 ===== */
+.bottom-bar {
+  position: sticky; bottom: 0;
+  background: #fff; border-top: 1px solid var(--color-border-light);
+  padding: 12px 24px;
+  display: flex; justify-content: flex-end; gap: 10px;
+  z-index: 10;
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+  text-align: center; padding: 48px 24px; color: var(--color-text-muted);
+}
+.empty-state .icon {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--color-disabled-light);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 14px; font-size: 28px;
+}
+
+/* ===== 渐变图标 ===== */
+.ic-blue   { background: linear-gradient(135deg, #3087CC, #5BA8DE); }
+.ic-green  { background: linear-gradient(135deg, #1BB975, #4CD3A5); }
+.ic-orange { background: linear-gradient(135deg, #F29100, #FFB347); }
+.ic-purple { background: linear-gradient(135deg, #6B5BD8, #9C8DF0); }
+.ic-cyan   { background: linear-gradient(135deg, #06B6D4, #67E8F9); }
+.ic-pink   { background: linear-gradient(135deg, #DF2027, #F87171); }
+.ic-indigo { background: linear-gradient(135deg, #4F46E5, #818CF8); }
+.ic-teal   { background: linear-gradient(135deg, #0D9488, #5EEAD4); }
+
+/* ===== 隐藏滚动条 ===== */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* ===== Focus & a11y ===== */
+:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+</style>
+<script src="interactions.js" defer></script>
+<style>
+  .module-card {
+    background: #fff; border-radius: 8px; padding: 20px;
+    box-shadow: var(--shadow-sm); cursor: pointer;
+    transition: all var(--transition-normal); display: block; color: inherit;
+    position: relative; overflow: hidden;
+  }
+  .module-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+  .module-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 18px; flex-shrink: 0;
+  }
+  .quick-stat { background: #fff; border-radius: 8px; padding: 20px; box-shadow: var(--shadow-sm); }
+  .recent-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--color-border-light); }
+  .recent-row:last-child { border-bottom: none; }
+  .recent-row:hover { background: #FAFBFD; margin: 0 -12px; padding: 12px; border-radius: 6px; }
+</style>
+</head>
+<body>
+<div class="app-layout">
+  <!-- 侧边栏 -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon"><i class="fa-solid fa-brain"></i></div>
+      <div class="logo-text">心理培训中心</div>
+    </div>
+    <nav class="sidebar-nav" id="sidebarNav">
+      <div class="nav-group-label">工作台</div>
+      <a href="index.html" class="nav-item active"><span class="icon"><i class="fa-solid fa-gauge-high"></i></span>首页概览</a>
+
+      <div class="nav-group-label" id="navGroupAdmin">管理功能</div>
+      <a href="staff-list.html" class="nav-item" id="navStaff"><span class="icon"><i class="fa-solid fa-users"></i></span>人员管理</a>
+      <a href="plan-list.html" class="nav-item" id="navPlan"><span class="icon"><i class="fa-solid fa-calendar-check"></i></span>培训计划</a>
+      <a href="review-list.html" class="nav-item" id="navReview"><span class="icon"><i class="fa-solid fa-clipboard-check"></i></span>学分审核<span class="badge">12</span></a>
+      <a href="credit-stats.html" class="nav-item" id="navStats"><span class="icon"><i class="fa-solid fa-chart-column"></i></span>学分统计</a>
+
+      <div class="nav-group-label" id="navGroupTrainee">参训功能</div>
+      <a href="../参与端/training-list.html" class="nav-item" id="navTraining"><span class="icon"><i class="fa-solid fa-book-open-reader"></i></span>培训计划</a>
+      <a href="../参与端/apply-required.html" class="nav-item" id="navRequired"><span class="icon"><i class="fa-solid fa-file-circle-check"></i></span>必修申报</a>
+      <a href="../参与端/apply-elective.html" class="nav-item" id="navElective"><span class="icon"><i class="fa-solid fa-arrow-up-from-bracket"></i></span>选修申报</a>
+      <a href="../参与端/my-credits.html" class="nav-item" id="navCredits"><span class="icon"><i class="fa-solid fa-medal"></i></span>我的学分</a>
+    </nav>
+    <div class="sidebar-footer">
+      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop" class="avatar" style="width:32px;height:32px" alt="头像" />
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">林芳老师</div>
+        <div style="font-size:11px;color:var(--color-text-muted)">心理学院</div>
+      </div>
+      <i class="fa-solid fa-right-from-bracket" style="color:var(--color-text-muted);cursor:pointer;font-size:14px" title="退出"></i>
+    </div>
+  </aside>
+
+  <!-- 主区域 -->
+  <div class="main-area">
+    <header class="top-header">
+      <div class="breadcrumb">
+        <i class="fa-solid fa-house" style="font-size:12px"></i>
+        <span>/</span>
+        <span class="current">首页概览</span>
+      </div>
+      <div class="spacer"></div>
+      <div class="seg-control" id="roleSeg">
+        <button class="active" data-role="admin"><i class="fa-solid fa-user-shield mr-1"></i>管理员</button>
+        <button data-role="trainee"><i class="fa-solid fa-user mr-1"></i>参训人员</button>
+      </div>
+      <div class="search-box">
+        <i class="fa-solid fa-search"></i>
+        <input type="text" placeholder="搜索培训计划、人员..." />
+      </div>
+      <div class="header-action" title="通知"><i class="fa-regular fa-bell"></i><span class="dot"></span></div>
+      <div class="header-action" title="设置"><i class="fa-solid fa-gear"></i></div>
+    </header>
+
+    <main class="page-content" style="max-width:100%">
+      <!-- 欢迎横幅 -->
+      <div class="rounded-xl p-6 text-white relative overflow-hidden mb-6" style="background: linear-gradient(135deg, #3087CC 0%, #006DAD 100%);">
+        <div class="absolute -right-10 -top-10 w-48 h-48 rounded-full opacity-10" style="background:#fff"></div>
+        <div class="absolute right-20 -bottom-12 w-28 h-28 rounded-full opacity-10" style="background:#fff"></div>
+        <div class="flex items-center justify-between relative" style="z-index:1">
+          <div>
+            <div class="text-sm opacity-90">中南大学 · 学工系统</div>
+            <div class="text-2xl font-bold mt-1">心理培训管理平台</div>
+            <div class="text-sm opacity-90 mt-2">培训组织 · 学分申报 · 数据统计</div>
+          </div>
+          <div class="flex items-center gap-6">
+            <div class="text-center">
+              <div class="text-3xl font-bold">1,286</div>
+              <div class="text-xs opacity-80 mt-1">参训人员</div>
+            </div>
+            <div style="width:1px;height:40px;background:rgba(255,255,255,0.2)"></div>
+            <div class="text-center">
+              <div class="text-3xl font-bold">42</div>
+              <div class="text-xs opacity-80 mt-1">培训计划</div>
+            </div>
+            <div style="width:1px;height:40px;background:rgba(255,255,255,0.2)"></div>
+            <div class="text-center">
+              <div class="text-3xl font-bold">4,128</div>
+              <div class="text-xs opacity-80 mt-1">累计学分</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 管理员面板 -->
+      <div id="adminPanel">
+        <div class="grid grid-cols-4 gap-4 mb-6">
+          <div class="stat-card">
+            <div class="stat-icon ic-blue"><i class="fa-solid fa-users"></i></div>
+            <div class="stat-info">
+              <div class="stat-label">参训人员</div>
+              <div class="stat-value">1,286</div>
+              <div class="stat-change" style="color:var(--color-success)"><i class="fa-solid fa-arrow-up"></i> 12%</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon ic-green"><i class="fa-solid fa-calendar-check"></i></div>
+            <div class="stat-info">
+              <div class="stat-label">进行中计划</div>
+              <div class="stat-value">3</div>
+              <div class="stat-change" style="color:var(--color-success)"><i class="fa-solid fa-arrow-up"></i> 本月新增 2</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon ic-orange"><i class="fa-solid fa-clipboard-check"></i></div>
+            <div class="stat-info">
+              <div class="stat-label">待审核</div>
+              <div class="stat-value">12</div>
+              <div class="stat-change" style="color:var(--color-warning)"><i class="fa-solid fa-clock"></i> 需及时处理</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon ic-purple"><i class="fa-solid fa-chart-column"></i></div>
+            <div class="stat-info">
+              <div class="stat-label">本年度学分</div>
+              <div class="stat-value">4,128</div>
+              <div class="stat-change" style="color:var(--color-success)"><i class="fa-solid fa-arrow-up"></i> 8%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-base font-semibold mb-3">功能入口</div>
+        <div class="grid grid-cols-4 gap-4 mb-6">
+          <a href="staff-list.html" class="module-card">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="module-icon ic-blue"><i class="fa-solid fa-users"></i></div>
+              <div>
+                <div class="font-semibold">人员管理</div>
+                <div class="text-xs text-[var(--color-text-muted)]">维护参训人员档案</div>
+              </div>
+            </div>
+            <div class="text-xs text-[var(--color-text-muted)]"><i class="fa-solid fa-user-group mr-1"></i>共 1,286 人</div>
+          </a>
+          <a href="plan-list.html" class="module-card">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="module-icon ic-green"><i class="fa-solid fa-calendar-check"></i></div>
+              <div>
+                <div class="font-semibold">培训计划</div>
+                <div class="text-xs text-[var(--color-text-muted)]">发布与组织培训</div>
+              </div>
+            </div>
+            <div class="text-xs text-[var(--color-success)]"><i class="fa-solid fa-bolt mr-1"></i>3 个进行中</div>
+          </a>
+          <a href="review-list.html" class="module-card">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="module-icon ic-orange"><i class="fa-solid fa-clipboard-check"></i></div>
+              <div>
+                <div class="font-semibold">学分审核</div>
+                <div class="text-xs text-[var(--color-text-muted)]">审核学员学分申报</div>
+              </div>
+            </div>
+            <div class="text-xs text-[var(--color-warning)]"><i class="fa-regular fa-clock mr-1"></i>12 条待审核</div>
+          </a>
+          <a href="credit-stats.html" class="module-card">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="module-icon ic-purple"><i class="fa-solid fa-chart-column"></i></div>
+              <div>
+                <div class="font-semibold">学分统计</div>
+                <div class="text-xs text-[var(--color-text-muted)]">多维度学分数据</div>
+              </div>
+            </div>
+            <div class="text-xs" style="color:#6B5BD8"><i class="fa-solid fa-arrow-trend-up mr-1"></i>本年 4,128 分</div>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4">
+          <div class="card col-span-2">
+            <div class="card-title">最近培训计划 <a href="plan-list.html" class="extra" style="color:var(--color-primary);cursor:pointer">查看全部 →</a></div>
+            <table class="data-table">
+              <thead><tr><th>培训名称</th><th>类型</th><th>时间</th><th>状态</th></tr></thead>
+              <tbody>
+                <tr><td class="font-medium">大学生心理危机识别与干预</td><td><span class="tag tag-primary">必修</span></td><td>2026-05-12</td><td><span class="tag tag-success">进行中</span></td></tr>
+                <tr><td class="font-medium">沙盘游戏督导工作坊</td><td><span class="tag tag-warning">选修</span></td><td>2026-05-15</td><td><span class="tag tag-primary">报名中</span></td></tr>
+                <tr><td class="font-medium">心理咨询伦理与规范</td><td><span class="tag tag-primary">必修</span></td><td>2026-05-20</td><td><span class="tag tag-muted">未开始</span></td></tr>
+                <tr><td class="font-medium">情绪管理与压力调适</td><td><span class="tag tag-warning">选修</span></td><td>2026-05-25</td><td><span class="tag tag-muted">未开始</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <div class="card-title">待办事项</div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;border-radius:6px;background:var(--color-warning-light);border:1px solid var(--color-warning-border)">
+                <i class="fa-solid fa-clock" style="color:var(--color-warning);margin-top:2px"></i>
+                <div>
+                  <div class="text-sm font-medium">12 条学分申报待审核</div>
+                  <div class="text-xs text-[var(--color-text-muted)] mt-0.5">请及时审核以免延误</div>
+                  <a href="review-list.html" class="text-xs mt-1 inline-block" style="color:var(--color-primary)">前往处理 →</a>
+                </div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;border-radius:6px;background:var(--color-primary-light);border:1px solid var(--color-primary-border)">
+                <i class="fa-solid fa-info-circle" style="color:var(--color-primary);margin-top:2px"></i>
+                <div>
+                  <div class="text-sm font-medium">3 个培训计划进行中</div>
+                  <div class="text-xs text-[var(--color-text-muted)] mt-0.5">关注培训进度与参与率</div>
+                  <a href="plan-list.html" class="text-xs mt-1 inline-block" style="color:var(--color-primary)">查看详情 →</a>
+                </div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;border-radius:6px;background:var(--color-success-light);border:1px solid var(--color-success-border)">
+                <i class="fa-solid fa-circle-check" style="color:var(--color-success);margin-top:2px"></i>
+                <div>
+                  <div class="text-sm font-medium">本月新增学分 15.5 分</div>
+                  <div class="text-xs text-[var(--color-text-muted)] mt-0.5">较上月增长 12%</div>
+                  <a href="credit-stats.html" class="text-xs mt-1 inline-block" style="color:var(--color-primary)">查看统计 →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 参训人员面板 -->
+      <div id="traineePanel" class="hidden">
+        <div class="grid grid-cols-4 gap-4 mb-6">
+          <div class="stat-card">
+            <div class="stat-icon ic-cyan"><i class="fa-solid fa-book-open-reader"></i></div>
+            <div class="stat-info">
+              <div class="stat-label">可报名培训</div>
+              <div class="stat-value">5</div>
+              <div class="stat-change" style="color:var(--color-success)"><i class="fa-solid fa-fire"></i> 本周新增 2</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon ic-indigo"><i class="fa-solid fa-file-circle-check"></i></div>
+            <div class="stat-info">
+              <div class="stat-label">必修可申报</div>
+              <div class="stat-value">2</div>
+              <div class="stat-change" style="color:var(--color-primary)"><i class="fa-solid fa-bookmark"></i> 线上培训</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon ic-teal"><i class="fa-solid fa-arrow-up-from-bracket"></i></div>
+            <div class="stat-info">
+              <div class="stat-label">选修已申报</div>
+              <div class="stat-value">3</div>
+              <div class="stat-change" style="color:var(--color-warning)"><i class="fa-solid fa-clock"></i> 1 条审核中</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon ic-pink"><i class="fa-solid fa-medal"></i></div>
+            <div class="stat-info">
+              <div class="stat-label">累计学分</div>
+              <div class="stat-value">12.5</div>
+              <div class="stat-change" style="color:var(--color-success)"><i class="fa-solid fa-arrow-up"></i> 本年 +4.5</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-base font-semibold mb-3">功能入口</div>
+        <div class="grid grid-cols-4 gap-4 mb-6">
+          <a href="../参与端/training-list.html" class="module-card">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="module-icon ic-cyan"><i class="fa-solid fa-book-open-reader"></i></div>
+              <div>
+                <div class="font-semibold">培训计划</div>
+                <div class="text-xs text-[var(--color-text-muted)]">查看与报名培训</div>
+              </div>
+            </div>
+            <div class="text-xs text-[var(--color-primary)]"><i class="fa-solid fa-fire mr-1"></i>5 项可报名</div>
+          </a>
+          <a href="../参与端/apply-required.html" class="module-card">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="module-icon ic-indigo"><i class="fa-solid fa-file-circle-check"></i></div>
+              <div>
+                <div class="font-semibold">必修申报</div>
+                <div class="text-xs text-[var(--color-text-muted)]">线上培训学分申报</div>
+              </div>
+            </div>
+            <div class="text-xs" style="color:#4F46E5"><i class="fa-solid fa-bookmark mr-1"></i>2 项可申报</div>
+          </a>
+          <a href="../参与端/apply-elective.html" class="module-card">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="module-icon ic-teal"><i class="fa-solid fa-arrow-up-from-bracket"></i></div>
+              <div>
+                <div class="font-semibold">选修申报</div>
+                <div class="text-xs text-[var(--color-text-muted)]">校外培训学分申报</div>
+              </div>
+            </div>
+            <div class="text-xs" style="color:#0D9488"><i class="fa-solid fa-plus mr-1"></i>新建申报</div>
+          </a>
+          <a href="../参与端/my-credits.html" class="module-card">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="module-icon ic-pink"><i class="fa-solid fa-medal"></i></div>
+              <div>
+                <div class="font-semibold">我的学分</div>
+                <div class="text-xs text-[var(--color-text-muted)]">学分明细与统计</div>
+              </div>
+            </div>
+            <div class="text-xs" style="color:var(--color-danger)"><i class="fa-solid fa-star mr-1"></i>12.5 学分</div>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4">
+          <div class="card col-span-2">
+            <div class="card-title">最近培训 <a href="../参与端/training-list.html" class="extra" style="color:var(--color-primary);cursor:pointer">查看全部 →</a></div>
+            <div class="recent-row">
+              <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?w=200&h=200&fit=crop" style="width:48px;height:48px;border-radius:8px;object-fit:cover" alt="培训" />
+              <div style="flex:1;min-width:0">
+                <div class="flex items-center gap-2">
+                  <span class="tag tag-primary">必修</span>
+                  <span class="tag tag-success">线上</span>
+                </div>
+                <div class="font-medium mt-1">大学生心理危机识别与干预</div>
+                <div class="text-xs text-[var(--color-text-muted)] mt-0.5"><i class="fa-regular fa-clock mr-1"></i>2026-05-12 14:00</div>
+              </div>
+              <a href="../参与端/training-detail.html" class="btn btn-sm btn-secondary">查看详情</a>
+            </div>
+            <div class="recent-row">
+              <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=200&h=200&fit=crop" style="width:48px;height:48px;border-radius:8px;object-fit:cover" alt="培训" />
+              <div style="flex:1;min-width:0">
+                <div class="flex items-center gap-2">
+                  <span class="tag tag-warning">选修</span>
+                  <span class="tag tag-danger">线下</span>
+                </div>
+                <div class="font-medium mt-1">沙盘游戏督导工作坊</div>
+                <div class="text-xs text-[var(--color-text-muted)] mt-0.5"><i class="fa-regular fa-clock mr-1"></i>2026-05-15 09:00</div>
+              </div>
+              <a href="../参与端/training-detail.html" class="btn btn-sm btn-secondary">查看详情</a>
+            </div>
+            <div class="recent-row">
+              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=200&h=200&fit=crop" style="width:48px;height:48px;border-radius:8px;object-fit:cover" alt="培训" />
+              <div style="flex:1;min-width:0">
+                <div class="flex items-center gap-2">
+                  <span class="tag tag-primary">必修</span>
+                  <span class="tag tag-danger">线下</span>
+                </div>
+                <div class="font-medium mt-1">心理咨询伦理与规范</div>
+                <div class="text-xs text-[var(--color-text-muted)] mt-0.5"><i class="fa-regular fa-clock mr-1"></i>2026-05-20 09:30</div>
+              </div>
+              <a href="../参与端/training-detail.html" class="btn btn-sm btn-secondary">查看详情</a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">我的学分概况</div>
+            <div class="text-center py-4">
+              <div class="inline-flex items-center justify-center w-24 h-24 rounded-full" style="background: conic-gradient(var(--color-primary) 0deg 216deg, var(--color-disabled-light) 216deg 360deg);">
+                <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center flex-col">
+                  <div class="text-2xl font-bold" style="color:var(--color-primary)">12.5</div>
+                  <div class="text-[10px] text-[var(--color-text-muted)]">总学分</div>
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-between text-sm px-2 mb-2">
+              <span class="text-[var(--color-text-secondary)]">必修学分</span>
+              <span class="font-medium">8.0</span>
+            </div>
+            <div class="progress mb-3"><div class="bar" style="width:66%"></div></div>
+            <div class="flex justify-between text-sm px-2 mb-2">
+              <span class="text-[var(--color-text-secondary)]">选修学分</span>
+              <span class="font-medium">4.5</span>
+            </div>
+            <div class="progress"><div class="bar" style="width:45%;background:var(--color-success)"></div></div>
+            <a href="../参与端/my-credits.html" class="btn btn-text btn-block mt-4" style="justify-content:center">查看明细 →</a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+  const seg = document.getElementById('roleSeg');
+  const adminPanel = document.getElementById('adminPanel');
+  const traineePanel = document.getElementById('traineePanel');
+
+  const adminNavIds = ['navGroupAdmin','navStaff','navPlan','navReview','navStats'];
+  const traineeNavIds = ['navGroupTrainee','navTraining','navRequired','navElective','navCredits'];
+
+  function switchRole(role) {
+    if (role === 'admin') {
+      adminPanel.classList.remove('hidden');
+      traineePanel.classList.add('hidden');
+      adminNavIds.forEach(id => document.getElementById(id).style.display = '');
+      traineeNavIds.forEach(id => document.getElementById(id).style.display = 'none');
+    } else {
+      adminPanel.classList.add('hidden');
+      traineePanel.classList.remove('hidden');
+      adminNavIds.forEach(id => document.getElementById(id).style.display = 'none');
+      traineeNavIds.forEach(id => document.getElementById(id).style.display = '');
+    }
+  }
+
+  seg.addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    seg.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    switchRole(btn.dataset.role);
+  });
+
+  switchRole('admin');
+
+  document.querySelector('.top-header .search-box input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      showToast('搜索功能开发中...', 'info');
+    }
+  });
+
+  document.querySelector('.header-action[title="通知"]').addEventListener('click', () => {
+    showToast('暂无新通知', 'info');
+  });
+</script>
+</body>
+</html>

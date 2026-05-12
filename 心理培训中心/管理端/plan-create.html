@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>新建培训计划 · 心理培训中心</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+/* 心理培训中心 · PC 端公共样式（中南主色体系 · 学工 Design System） */
+
+:root {
+  --color-primary: #3087CC;
+  --color-primary-light: #E3F1F9;
+  --color-primary-dark: #006DAD;
+  --color-primary-border: #BADEF3;
+  --color-text-primary: #3C444F;
+  --color-text-secondary: #696F7D;
+  --color-text-muted: #9096A2;
+  --color-text-placeholder: #ABB0BA;
+  --color-border: #C8CAD1;
+  --color-border-light: #ECEFF4;
+  --color-bg-page: #F5F7FA;
+  --color-bg-card: #FFFFFF;
+  --color-success: #1BB975;
+  --color-success-light: #E8FCF4;
+  --color-success-border: #A7F3D0;
+  --color-warning: #F29100;
+  --color-warning-light: #FFF5E5;
+  --color-warning-border: #FFE0B3;
+  --color-danger: #DF2027;
+  --color-danger-light: #FCE8EA;
+  --color-danger-border: #F6BCBE;
+  --color-disabled: #ABB0BA;
+  --color-disabled-light: #F1F2F3;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --sidebar-width: 220px;
+  --header-height: 56px;
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease-in-out;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: 'OPPOSans', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  color: var(--color-text-primary);
+  background: var(--color-bg-page);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* ===== 全局布局 ===== */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ===== 侧边栏 ===== */
+.sidebar {
+  width: var(--sidebar-width);
+  background: #fff;
+  border-right: 1px solid var(--color-border-light);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 30;
+  overflow-y: auto;
+}
+.sidebar-logo {
+  height: var(--header-height);
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--color-border-light);
+  flex-shrink: 0;
+}
+.sidebar-logo .logo-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #3087CC, #006DAD);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.sidebar-logo .logo-text {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+.sidebar-nav {
+  flex: 1;
+  padding: 12px 8px;
+}
+.nav-group-label {
+  padding: 10px 12px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-bottom: 2px;
+  position: relative;
+}
+.nav-item:hover {
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
+}
+.nav-item.active {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-weight: 500;
+}
+.nav-item .icon {
+  width: 20px;
+  text-align: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.nav-item .badge {
+  margin-left: auto;
+  background: var(--color-danger);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 10px;
+  line-height: 1.4;
+}
+.sidebar-footer {
+  padding: 12px 16px;
+  border-top: 1px solid var(--color-border-light);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* ===== 主区域 ===== */
+.main-area {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===== 顶部栏 ===== */
+.top-header {
+  height: var(--header-height);
+  background: #fff;
+  border-bottom: 1px solid var(--color-border-light);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.top-header .breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+.top-header .breadcrumb a { color: var(--color-text-muted); transition: color var(--transition-fast); }
+.top-header .breadcrumb a:hover { color: var(--color-primary); }
+.top-header .breadcrumb .current { color: var(--color-text-primary); font-weight: 500; }
+.top-header .spacer { flex: 1; }
+.header-action {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+.header-action:hover { background: var(--color-bg-page); color: var(--color-text-primary); }
+.header-action .dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-danger);
+  border: 1.5px solid #fff;
+}
+.user-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px 4px 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+.user-chip:hover { background: var(--color-bg-page); }
+.user-chip img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.user-chip .name { font-size: 13px; font-weight: 500; }
+.user-chip .role { font-size: 11px; color: var(--color-text-muted); }
+
+/* 搜索框 */
+.search-box {
+  position: relative;
+  width: 260px;
+}
+.search-box i {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+.search-box input {
+  width: 100%;
+  height: 36px;
+  padding: 0 12px 0 32px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border-light);
+  background: var(--color-bg-page);
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--color-text-primary);
+  outline: none;
+  transition: all var(--transition-fast);
+}
+.search-box input:focus {
+  border-color: var(--color-primary);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(48, 135, 204, 0.1);
+}
+
+/* ===== 页面内容区 ===== */
+.page-content {
+  flex: 1;
+  padding: 24px;
+  max-width: 1200px;
+}
+.page-content.wide { max-width: 100%; }
+
+/* 页面头 */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+.page-header .left { display: flex; flex-direction: column; gap: 4px; }
+.page-title { font-size: 20px; font-weight: 600; color: var(--color-text-primary); }
+.page-desc { font-size: 13px; color: var(--color-text-muted); }
+.page-header .actions { display: flex; align-items: center; gap: 8px; }
+
+/* ===== 卡片 ===== */
+.card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+}
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-title .extra {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+/* ===== 统计卡片 ===== */
+.stat-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.stat-card .stat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #fff;
+  flex-shrink: 0;
+}
+.stat-card .stat-info { flex: 1; }
+.stat-card .stat-label { font-size: 13px; color: var(--color-text-muted); }
+.stat-card .stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+  margin-top: 2px;
+}
+.stat-card .stat-change {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+/* ===== 数据表格 ===== */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.data-table thead {
+  background: var(--color-primary-light);
+}
+.data-table th {
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  border-bottom: 1px solid var(--color-border-light);
+}
+.data-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--color-border-light);
+  vertical-align: middle;
+}
+.data-table tbody tr {
+  transition: background var(--transition-fast);
+}
+.data-table tbody tr:hover {
+  background: #FAFBFD;
+}
+.data-table tbody tr:last-child td { border-bottom: none; }
+
+/* ===== 标签 Tag ===== */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.tag-primary { background: var(--color-primary-light); color: var(--color-primary); }
+.tag-success { background: var(--color-success-light); color: var(--color-success); border: 1px solid var(--color-success-border); }
+.tag-warning { background: var(--color-warning-light); color: var(--color-warning); border: 1px solid var(--color-warning-border); }
+.tag-danger  { background: var(--color-danger-light); color: var(--color-danger); border: 1px solid var(--color-danger-border); }
+.tag-muted   { background: var(--color-disabled-light); color: var(--color-text-secondary); border: 1px solid var(--color-border); }
+
+/* ===== 按钮 ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  border: 1px solid transparent;
+  font-family: inherit;
+}
+.btn:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+.btn-primary { background: var(--color-primary); color: #fff; }
+.btn-primary:hover { background: var(--color-primary-dark); }
+.btn-secondary { background: #fff; color: var(--color-primary); border-color: var(--color-primary); }
+.btn-secondary:hover { background: var(--color-primary-light); }
+.btn-ghost { background: var(--color-disabled-light); color: var(--color-text-primary); }
+.btn-ghost:hover { background: #E4E6EA; }
+.btn-danger { background: var(--color-danger); color: #fff; }
+.btn-danger:hover { background: #C41A20; }
+.btn-text { background: none; color: var(--color-primary); padding: 0 8px; height: auto; }
+.btn-text:hover { text-decoration: underline; }
+.btn-block { width: 100%; }
+.btn-sm { height: 30px; padding: 0 10px; font-size: 13px; border-radius: 6px; }
+.btn-lg { height: 42px; padding: 0 20px; font-size: 15px; }
+.btn[disabled] { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+
+/* ===== 表单 ===== */
+.form-group { margin-bottom: 16px; }
+.form-label {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-bottom: 6px;
+  display: block;
+  font-weight: 500;
+}
+.form-label .req { color: var(--color-danger); margin-right: 2px; }
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: #fff;
+  font-size: 14px;
+  color: var(--color-text-primary);
+  font-family: inherit;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+.form-input::placeholder,
+.form-textarea::placeholder { color: var(--color-text-placeholder); }
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(48, 135, 204, 0.1);
+}
+.form-textarea { height: auto; padding: 10px 12px; min-height: 80px; resize: vertical; }
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239096A2' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+.form-hint { font-size: 12px; color: var(--color-text-muted); margin-top: 4px; }
+.form-row-inline { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* ===== 开关 ===== */
+.switch { position: relative; display: inline-block; width: 40px; height: 22px; flex-shrink: 0; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.switch .slider {
+  position: absolute; cursor: pointer; inset: 0;
+  background: #C8CAD1; border-radius: 22px; transition: 200ms;
+}
+.switch .slider::before {
+  position: absolute; content: '';
+  height: 18px; width: 18px; left: 2px; bottom: 2px;
+  background: #fff; border-radius: 50%; transition: 200ms;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+.switch input:checked + .slider { background: var(--color-primary); }
+.switch input:checked + .slider::before { transform: translateX(18px); }
+
+/* ===== 复选/单选 ===== */
+.checkbox, .radio {
+  width: 18px; height: 18px;
+  border: 1.5px solid var(--color-border);
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0; cursor: pointer; transition: all var(--transition-fast);
+}
+.checkbox { border-radius: 4px; }
+.radio { border-radius: 50%; }
+.checkbox.checked, .radio.checked { background: var(--color-primary); border-color: var(--color-primary); }
+.checkbox.checked::after {
+  content: ''; width: 4px; height: 8px; border: solid #fff;
+  border-width: 0 2px 2px 0; transform: rotate(45deg) translate(-1px, -1px);
+}
+.radio.checked { background: #fff; border-color: var(--color-primary); border-width: 5px; }
+
+/* ===== 进度条 ===== */
+.progress { width: 100%; height: 8px; background: var(--color-disabled-light); border-radius: 10px; overflow: hidden; }
+.progress .bar { height: 100%; background: var(--color-primary); border-radius: 10px; transition: width 300ms; }
+
+/* ===== 头像 ===== */
+.avatar { border-radius: 50%; object-fit: cover; flex-shrink: 0; background: var(--color-disabled-light); }
+
+/* ===== 上传区 ===== */
+.uploader {
+  border: 1.5px dashed var(--color-border);
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  background: #FAFBFD;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.uploader:hover { border-color: var(--color-primary); background: var(--color-primary-light); }
+.uploader .icon {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--color-primary-light); color: var(--color-primary);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 10px; font-size: 18px;
+}
+
+/* ===== 分段控件 ===== */
+.seg-control {
+  background: #E9ECF1;
+  padding: 3px;
+  border-radius: 8px;
+  display: inline-flex;
+}
+.seg-control button {
+  height: 30px;
+  padding: 0 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: all 200ms ease;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+.seg-control button.active {
+  background: #fff;
+  color: var(--color-text-primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== Tab Bar ===== */
+.tab-bar {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--color-border-light);
+  margin-bottom: 16px;
+}
+.tab-bar .tab {
+  padding: 8px 14px;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  position: relative;
+  transition: color var(--transition-fast);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.tab-bar .tab:hover { color: var(--color-text-primary); }
+.tab-bar .tab.active {
+  color: var(--color-primary);
+  font-weight: 600;
+  border-bottom-color: var(--color-primary);
+}
+
+/* ===== 工具栏 ===== */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.toolbar .spacer { flex: 1; }
+.filter-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 5px 12px; border-radius: 14px;
+  background: #fff; color: var(--color-text-secondary);
+  font-size: 13px; border: 1px solid var(--color-border-light);
+  cursor: pointer; transition: all var(--transition-fast);
+}
+.filter-pill:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.filter-pill.active { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+
+/* ===== 底部操作栏 ===== */
+.bottom-bar {
+  position: sticky; bottom: 0;
+  background: #fff; border-top: 1px solid var(--color-border-light);
+  padding: 12px 24px;
+  display: flex; justify-content: flex-end; gap: 10px;
+  z-index: 10;
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+  text-align: center; padding: 48px 24px; color: var(--color-text-muted);
+}
+.empty-state .icon {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--color-disabled-light);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 14px; font-size: 28px;
+}
+
+/* ===== 渐变图标 ===== */
+.ic-blue   { background: linear-gradient(135deg, #3087CC, #5BA8DE); }
+.ic-green  { background: linear-gradient(135deg, #1BB975, #4CD3A5); }
+.ic-orange { background: linear-gradient(135deg, #F29100, #FFB347); }
+.ic-purple { background: linear-gradient(135deg, #6B5BD8, #9C8DF0); }
+.ic-cyan   { background: linear-gradient(135deg, #06B6D4, #67E8F9); }
+.ic-pink   { background: linear-gradient(135deg, #DF2027, #F87171); }
+.ic-indigo { background: linear-gradient(135deg, #4F46E5, #818CF8); }
+.ic-teal   { background: linear-gradient(135deg, #0D9488, #5EEAD4); }
+
+/* ===== 隐藏滚动条 ===== */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* ===== Focus & a11y ===== */
+:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+</style>
+<script src="interactions.js" defer></script>
+<style>
+  .section-title {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 15px; font-weight: 600; color: var(--color-text-primary);
+    margin-bottom: 16px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .section-title .dot {
+    width: 4px; height: 16px; border-radius: 2px;
+    background: var(--color-primary);
+  }
+  .section-title .extra {
+    margin-left: auto; font-size: 12px; font-weight: 400;
+    color: var(--color-text-muted);
+  }
+  .opt-radio {
+    flex: 1; height: 38px; border-radius: 8px;
+    border: 1px solid var(--color-border);
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    font-size: 13px; color: var(--color-text-secondary);
+    cursor: pointer; transition: all 150ms;
+  }
+  .opt-radio:hover { border-color: var(--color-primary); color: var(--color-primary); }
+  .opt-radio.active {
+    border-color: var(--color-primary); background: var(--color-primary-light);
+    color: var(--color-primary); font-weight: 500;
+  }
+  .multi-select-pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 4px 10px; border-radius: 14px; font-size: 12px;
+    background: var(--color-primary-light); color: var(--color-primary);
+  }
+  .multi-select-pill button {
+    color: var(--color-primary); margin-left: 2px;
+    background: none; border: none; cursor: pointer; font-size: 13px;
+  }
+  .multi-select-pill button:hover { color: var(--color-danger); }
+</style>
+</head>
+<body>
+<div class="app-layout">
+  <!-- 侧边栏 -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon"><i class="fa-solid fa-brain"></i></div>
+      <div class="logo-text">心理培训中心</div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-group-label">工作台</div>
+      <a href="index.html" class="nav-item"><span class="icon"><i class="fa-solid fa-gauge-high"></i></span>首页概览</a>
+      <div class="nav-group-label">管理功能</div>
+      <a href="staff-list.html" class="nav-item"><span class="icon"><i class="fa-solid fa-users"></i></span>人员管理</a>
+      <a href="plan-list.html" class="nav-item active"><span class="icon"><i class="fa-solid fa-calendar-check"></i></span>培训计划</a>
+      <a href="review-list.html" class="nav-item"><span class="icon"><i class="fa-solid fa-clipboard-check"></i></span>学分审核<span class="badge">12</span></a>
+      <a href="credit-stats.html" class="nav-item"><span class="icon"><i class="fa-solid fa-chart-column"></i></span>学分统计</a>
+    </nav>
+    <div class="sidebar-footer">
+      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop" class="avatar" style="width:32px;height:32px" alt="头像" />
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;font-weight:500">管理员</div>
+        <div style="font-size:11px;color:var(--color-text-muted)">心理中心</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 主区域 -->
+  <div class="main-area">
+    <header class="top-header">
+      <div class="breadcrumb">
+        <a href="index.html"><i class="fa-solid fa-house" style="font-size:12px"></i></a>
+        <span>/</span>
+        <a href="plan-list.html">培训计划</a>
+        <span>/</span>
+        <span class="current">新建计划</span>
+      </div>
+      <div class="spacer"></div>
+      <div class="header-action" title="通知"><i class="fa-regular fa-bell"></i></div>
+    </header>
+
+    <main class="page-content">
+      <div class="page-header">
+        <div class="left">
+          <div class="page-title">新建培训计划</div>
+          <div class="page-desc">填写培训信息并发布计划</div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-ghost"><i class="fa-regular fa-floppy-disk"></i>存草稿</button>
+        </div>
+      </div>
+
+      <!-- 基本信息 -->
+      <div class="card mb-5">
+        <div class="section-title"><span class="dot"></span>基本信息</div>
+        <div class="form-row-inline">
+          <div class="form-group">
+            <label class="form-label"><span class="req">*</span>培训主题</label>
+            <input type="text" class="form-input" placeholder="请输入培训主题" />
+          </div>
+          <div class="form-group">
+            <label class="form-label"><span class="req">*</span>培训方式</label>
+            <select class="form-select">
+              <option>讲座</option>
+              <option>工作坊</option>
+              <option>督导</option>
+              <option>沙龙</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row-inline">
+          <div class="form-group">
+            <label class="form-label"><span class="req">*</span>培训类型</label>
+            <div class="flex gap-2" id="typeGroup">
+              <span class="opt-radio active" data-val="必修"><i class="fa-solid fa-bookmark text-[12px]"></i>必修</span>
+              <span class="opt-radio" data-val="选修"><i class="fa-regular fa-bookmark text-[12px]"></i>选修</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label"><span class="req">*</span>培训渠道</label>
+            <div class="flex gap-2" id="channelGroup">
+              <span class="opt-radio active" data-val="线上"><i class="fa-solid fa-video text-[12px]"></i>线上</span>
+              <span class="opt-radio" data-val="线下"><i class="fa-solid fa-location-dot text-[12px]"></i>线下</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-row-inline">
+          <div class="form-group">
+            <label class="form-label"><span class="req">*</span>培训对象</label>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="multi-select-pill">心理中心老师 <button>×</button></span>
+              <span class="multi-select-pill">辅导员 <button>×</button></span>
+              <span class="multi-select-pill">心理专干 <button>×</button></span>
+              <span class="multi-select-pill" style="background: #F0F4F8; color: var(--color-text-secondary); cursor:pointer"><i class="fa-solid fa-plus text-[10px]"></i> 添加</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">主讲人</label>
+            <input type="text" class="form-input" placeholder="请输入主讲人姓名" />
+          </div>
+        </div>
+        <div class="form-group" style="max-width:calc(50% - 8px)">
+          <label class="form-label">主办单位</label>
+          <input type="text" class="form-input" placeholder="请输入主办单位" value="心理咨询中心" />
+        </div>
+      </div>
+
+      <!-- 时间地点 -->
+      <div class="card mb-5">
+        <div class="section-title"><span class="dot"></span>时间地点</div>
+        <div class="form-row-inline">
+          <div class="form-group">
+            <label class="form-label"><span class="req">*</span>开始时间</label>
+            <input type="datetime-local" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label"><span class="req">*</span>结束时间</label>
+            <input type="datetime-local" class="form-input" />
+          </div>
+        </div>
+
+        <!-- 线上字段 -->
+        <div id="onlineFields">
+          <div class="form-row-inline">
+            <div class="form-group">
+              <label class="form-label"><span class="req">*</span>线上会议平台</label>
+              <select class="form-select">
+                <option>腾讯会议</option>
+                <option>钉钉</option>
+                <option>学习通</option>
+                <option>其他</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label"><span class="req">*</span>会议地址 / 会议号</label>
+              <input type="text" class="form-input" placeholder="例如：123 456 789" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 线下字段 -->
+        <div id="offlineFields" class="hidden">
+          <div class="form-group" style="max-width:calc(50% - 8px)">
+            <label class="form-label"><span class="req">*</span>线下地址</label>
+            <input type="text" class="form-input" placeholder="例如：本部 综合楼 305" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 报名设置 -->
+      <div class="card mb-5">
+        <div class="section-title"><span class="dot"></span>报名设置</div>
+
+        <!-- 必修视图 -->
+        <div id="requiredFields">
+          <div class="form-row-inline" style="margin-bottom:16px">
+            <div class="flex items-center justify-between p-3 rounded-lg" style="background:var(--color-bg-page);border:1px solid var(--color-border-light)">
+              <div>
+                <div class="text-sm font-medium">指定必修人员</div>
+                <div class="text-xs text-[var(--color-text-muted)] mt-0.5">已选 156 人，可点击调整</div>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="document.getElementById('staffModal').style.display='flex'">选择人员</button>
+            </div>
+            <div class="flex items-center justify-between p-3 rounded-lg" style="background:var(--color-bg-page);border:1px solid var(--color-border-light)">
+              <div>
+                <div class="text-sm font-medium">允许其他人员报名</div>
+                <div class="text-xs text-[var(--color-text-muted)] mt-0.5">人数未满时开放报名</div>
+              </div>
+              <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 选修视图 -->
+        <div id="electiveFields" class="hidden">
+          <div style="margin-bottom:16px">
+            <div class="flex items-center justify-between p-3 rounded-lg" style="max-width:calc(50% - 8px);background:var(--color-bg-page);border:1px solid var(--color-border-light)">
+              <div>
+                <div class="text-sm font-medium">允许报名</div>
+                <div class="text-xs text-[var(--color-text-muted)] mt-0.5">关闭后将不接受报名</div>
+              </div>
+              <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row-inline">
+          <div class="form-group">
+            <label class="form-label">报名人数上限</label>
+            <input type="number" class="form-input" placeholder="不限" value="120" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">报名截止时间</label>
+            <input type="datetime-local" class="form-input" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 签到/签退 -->
+      <div class="card mb-5">
+        <div class="section-title"><span class="dot"></span>签到 / 签退</div>
+        <div class="flex items-center justify-between p-3 rounded-lg" style="max-width:calc(50% - 8px);background:var(--color-bg-page);border:1px solid var(--color-border-light)">
+          <div>
+            <div class="text-sm font-medium">开启签到 / 签退</div>
+            <div class="text-xs text-[var(--color-text-muted)] mt-0.5">关联学校现有打卡系统</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+        </div>
+      </div>
+
+      <!-- 学分规则 -->
+      <div class="card mb-5">
+        <div class="section-title"><span class="dot"></span>学分规则<span class="extra">前提：打卡 + 附件</span></div>
+        <div class="form-row-inline">
+          <div class="form-group">
+            <label class="form-label"><span class="req">*</span>本场学分</label>
+            <select class="form-select">
+              <option>0.5 分</option>
+              <option>1.0 分</option>
+              <option selected>1.5 分</option>
+              <option>2.0 分</option>
+              <option>2.5 分</option>
+              <option>3.0 分</option>
+            </select>
+            <div class="form-hint">以 0.5 为步长选择</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">学分申报截止时间</label>
+            <input type="datetime-local" class="form-input" />
+            <div class="form-hint">线上培训需学员申报，过期不再受理</div>
+          </div>
+        </div>
+        <div class="flex gap-5 mt-1">
+          <label class="flex items-center gap-2 text-sm cursor-pointer">
+            <span class="checkbox checked"></span>
+            <span>需打卡</span>
+          </label>
+          <label class="flex items-center gap-2 text-sm cursor-pointer">
+            <span class="checkbox checked"></span>
+            <span>需上传附件</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- 附件设置 -->
+      <div class="card mb-5">
+        <div class="section-title"><span class="dot"></span>附件设置</div>
+        <div class="flex items-center justify-between p-3 rounded-lg" style="max-width:calc(50% - 8px);background:var(--color-bg-page);border:1px solid var(--color-border-light)">
+          <div>
+            <div class="text-sm font-medium">允许学员上传附件</div>
+            <div class="text-xs text-[var(--color-text-muted)] mt-0.5">如证书、培训照片等</div>
+          </div>
+          <label class="switch"><input type="checkbox" checked /><span class="slider"></span></label>
+        </div>
+      </div>
+    </main>
+
+    <!-- 底部操作栏 -->
+    <div class="bottom-bar">
+      <button class="btn btn-ghost" id="btnCancel">取消</button>
+      <button class="btn btn-primary" id="btnPublish"><i class="fa-solid fa-paper-plane"></i>发布计划</button>
+    </div>
+  </div>
+</div>
+
+<!-- 人员选择弹窗 -->
+<div id="staffModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:9998;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:12px;width:720px;max-width:92vw;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.15)">
+    <div style="padding:16px 20px;border-bottom:1px solid var(--color-border-light);display:flex;align-items:center;justify-content:space-between">
+      <div style="font-size:16px;font-weight:600;color:var(--color-text-primary)">选择培训对象</div>
+      <button style="width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--color-text-muted);border:none;background:var(--color-bg-page)" onclick="document.getElementById('staffModal').style.display='none'"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div style="padding:16px 20px;border-bottom:1px solid var(--color-border-light);display:flex;gap:10px;align-items:center">
+      <div class="search-box" style="flex:1"><i class="fa-solid fa-magnifying-glass"></i><input type="text" placeholder="搜索姓名、工号..." id="staffSearchInput" /></div>
+      <select class="form-select" style="width:140px"><option value="">全部学院</option><option>心理学院</option><option>计算机学院</option><option>商学院</option><option>文学院</option><option>物理与电子学院</option></select>
+      <select class="form-select" style="width:130px"><option value="">全部角色</option><option>辅导员</option><option>心理专干</option><option>心理中心老师</option><option>班导师</option><option>副书记</option></select>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:0">
+      <table class="data-table" style="margin:0">
+        <thead><tr><th style="width:44px;text-align:center"><span class="checkbox checked" id="staffCheckAll"></span></th><th>姓名</th><th>工号</th><th>学院</th><th>角色</th></tr></thead>
+        <tbody>
+          <tr><td style="text-align:center"><span class="checkbox checked"></span></td><td><div class="flex items-center gap-2"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop" class="avatar" style="width:28px;height:28px"><span>林芳</span></div></td><td>2018102</td><td>心理学院</td><td><span class="tag tag-primary">心理专干</span></td></tr>
+          <tr><td style="text-align:center"><span class="checkbox checked"></span></td><td><div class="flex items-center gap-2"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop" class="avatar" style="width:28px;height:28px"><span>王建国</span></div></td><td>2019035</td><td>计算机学院</td><td><span class="tag tag-warning">辅导员</span></td></tr>
+          <tr><td style="text-align:center"><span class="checkbox checked"></span></td><td><div class="flex items-center gap-2"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop" class="avatar" style="width:28px;height:28px"><span>陈思雨</span></div></td><td>2017088</td><td>心理咨询中心</td><td><span class="tag tag-primary">心理中心老师</span></td></tr>
+          <tr><td style="text-align:center"><span class="checkbox checked"></span></td><td><div class="flex items-center gap-2"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop" class="avatar" style="width:28px;height:28px"><span>赵立伟</span></div></td><td>2016042</td><td>文学院</td><td><span class="tag tag-danger">副书记</span></td></tr>
+          <tr><td style="text-align:center"><span class="checkbox"></span></td><td><div class="flex items-center gap-2"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop" class="avatar" style="width:28px;height:28px"><span>刘晓敏</span></div></td><td>2020156</td><td>物理与电子学院</td><td><span class="tag tag-muted">导师</span></td></tr>
+          <tr><td style="text-align:center"><span class="checkbox checked"></span></td><td><div class="flex items-center gap-2"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop" class="avatar" style="width:28px;height:28px"><span>张伟</span></div></td><td>2019078</td><td>商学院</td><td><span class="tag tag-warning">辅导员</span></td></tr>
+          <tr><td style="text-align:center"><span class="checkbox"></span></td><td><div class="flex items-center gap-2"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=80&h=80&fit=crop" class="avatar" style="width:28px;height:28px"><span>李明辉</span></div></td><td>2018203</td><td>外国语学院</td><td><span class="tag tag-success">班导师</span></td></tr>
+          <tr><td style="text-align:center"><span class="checkbox checked"></span></td><td><div class="flex items-center gap-2"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&h=80&fit=crop" class="avatar" style="width:28px;height:28px"><span>周雅琴</span></div></td><td>2020012</td><td>化工学院</td><td><span class="tag tag-primary">心理专干</span></td></tr>
+          <tr><td style="text-align:center"><span class="checkbox checked"></span></td><td><div class="flex items-center gap-2"><img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?w=80&h=80&fit=crop" class="avatar" style="width:28px;height:28px"><span>黄志强</span></div></td><td>2019145</td><td>心理学院</td><td><span class="tag tag-warning">辅导员</span></td></tr>
+          <tr><td style="text-align:center"><span class="checkbox"></span></td><td><div class="flex items-center gap-2"><img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=80&h=80&fit=crop" class="avatar" style="width:28px;height:28px"><span>吴佳怡</span></div></td><td>2021034</td><td>计算机学院</td><td><span class="tag tag-primary">心理中心老师</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="padding:14px 20px;border-top:1px solid var(--color-border-light);display:flex;align-items:center;justify-content:space-between">
+      <div style="font-size:13px;color:var(--color-text-muted)">已选 <strong id="staffSelectedCount" style="color:var(--color-primary)">7</strong> / 10 人</div>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-ghost" onclick="document.getElementById('staffModal').style.display='none'">取消</button>
+        <button class="btn btn-primary" onclick="document.getElementById('staffModal').style.display='none';showToast('已更新培训对象，共选择 '+document.getElementById('staffSelectedCount').textContent+' 人','success')"><i class="fa-solid fa-check"></i>确认选择</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('staffModal').addEventListener('click', function(e) {
+    if (e.target === this) this.style.display='none';
+    var cb = e.target.closest('#staffModal .checkbox');
+    if (cb) {
+      cb.classList.toggle('checked');
+      var cnt = document.querySelectorAll('#staffModal tbody .checkbox.checked').length;
+      document.getElementById('staffSelectedCount').textContent = cnt;
+    }
+  });
+  document.getElementById('staffCheckAll').addEventListener('click', function() {
+    var all = this.classList.contains('checked');
+    document.querySelectorAll('#staffModal tbody .checkbox').forEach(function(c){ c.classList.toggle('checked', !all); });
+    this.classList.toggle('checked');
+    var cnt = document.querySelectorAll('#staffModal tbody .checkbox.checked').length;
+    document.getElementById('staffSelectedCount').textContent = cnt;
+  });
+</script>
+
+<script>
+  document.getElementById('typeGroup').addEventListener('click', (e) => {
+    const t = e.target.closest('.opt-radio');
+    if (!t) return;
+    document.querySelectorAll('#typeGroup .opt-radio').forEach(r => r.classList.remove('active'));
+    t.classList.add('active');
+    if (t.dataset.val === '必修') {
+      document.getElementById('requiredFields').classList.remove('hidden');
+      document.getElementById('electiveFields').classList.add('hidden');
+    } else {
+      document.getElementById('requiredFields').classList.add('hidden');
+      document.getElementById('electiveFields').classList.remove('hidden');
+    }
+  });
+
+  document.getElementById('channelGroup').addEventListener('click', (e) => {
+    const t = e.target.closest('.opt-radio');
+    if (!t) return;
+    document.querySelectorAll('#channelGroup .opt-radio').forEach(r => r.classList.remove('active'));
+    t.classList.add('active');
+    if (t.dataset.val === '线上') {
+      document.getElementById('onlineFields').classList.remove('hidden');
+      document.getElementById('offlineFields').classList.add('hidden');
+    } else {
+      document.getElementById('onlineFields').classList.add('hidden');
+      document.getElementById('offlineFields').classList.remove('hidden');
+    }
+  });
+
+  document.querySelectorAll('.checkbox').forEach(c => {
+    c.addEventListener('click', () => c.classList.toggle('checked'));
+  });
+
+  document.getElementById('btnCancel').addEventListener('click', async () => {
+    const ok = await showConfirm({
+      title: '放弃编辑？',
+      message: '当前编辑内容尚未保存，确定要放弃吗？',
+      confirmText: '放弃',
+      type: 'danger'
+    });
+    if (ok) location.href = 'plan-list.html';
+  });
+
+  document.getElementById('btnPublish').addEventListener('click', () => {
+    showSuccess({
+      title: '发布成功',
+      message: '培训计划已成功发布',
+      btnText: '返回列表',
+      href: 'plan-list.html'
+    });
+  });
+
+  document.querySelector('.btn.btn-ghost i.fa-floppy-disk').closest('.btn').addEventListener('click', () => {
+    showToast('草稿已保存', 'success');
+  });
+</script>
+</body>
+</html>
