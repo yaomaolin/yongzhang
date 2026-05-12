@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>新建用章申请 - 智慧学工</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f5f5;color:#1e293b;max-width:375px;margin:0 auto;min-height:100vh;padding-bottom:130px}
+a{text-decoration:none;color:inherit}
+.header{background:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #f0f0f0;position:sticky;top:0;z-index:50}
+.header .back{font-size:18px;color:#64748b}
+.header h1{font-size:16px;font-weight:600;flex:1}
+
+.section{background:#fff;padding:16px;margin-bottom:8px}
+.section-title{font-size:14px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.section-title::before{content:"";display:inline-block;width:3px;height:14px;background:#d97706;border-radius:2px}
+
+.readonly-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #f5f5f5}
+.readonly-row:last-child{border-bottom:none}
+.readonly-label{font-size:13px;color:#64748b}
+.readonly-value{font-size:13.5px;color:#1e293b;font-weight:500}
+
+.form-group{margin-bottom:14px}
+.form-label{font-size:13px;color:#374151;font-weight:500;margin-bottom:5px;display:flex;align-items:center;gap:4px}
+.form-label .req{color:#dc2626;font-size:14px}
+input[type="text"],input[type="tel"],input[type="number"],input[type="date"],textarea,select{width:100%;padding:10px 12px;border:1px solid #e2e8f0;border-radius:8px;font-size:14px;font-family:inherit;background:#fff;color:#1e293b}
+textarea{height:80px;resize:vertical}
+select{appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M2 4l4 4 4-4'/%3E%3C/svg%3E") no-repeat right 12px center}
+input:focus,textarea:focus,select:focus{border-color:#d97706;outline:none;box-shadow:0 0 0 2px rgba(217,119,6,0.1)}
+
+.upload-area{border:2px dashed #e2e8f0;border-radius:8px;padding:24px 16px;text-align:center}
+.upload-icon{font-size:24px;margin-bottom:4px;color:#d97706}
+.upload-text{font-size:13px;color:#64748b}
+.upload-hint{font-size:11px;color:#94a3b8;margin-top:4px}
+.upload-notice{font-size:12px;color:#b45309;margin-top:8px;line-height:1.55}
+
+.bottom-bar{position:fixed;bottom:50px;left:50%;transform:translateX(-50%);width:375px;background:#fff;border-top:1px solid #e5e7eb;padding:10px 16px;z-index:51}
+.btn-submit{display:block;width:100%;padding:13px;border-radius:10px;text-align:center;font-size:15px;font-weight:600;background:#d97706;color:#fff;border:none;cursor:pointer}
+.tab-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:375px;background:#fff;border-top:1px solid #e5e7eb;display:flex;padding:6px 0 env(safe-area-inset-bottom,8px);z-index:50}
+.tab-bar a{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:#94a3b8;padding:4px 0}
+.tab-bar a.active{color:#d97706}
+.tab-bar a .ticon{font-size:18px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="back" href="../index.html">←</a>
+  <h1>新建用章申请</h1>
+</div>
+
+<div class="section">
+  <div class="section-title">基础信息</div>
+  <div class="readonly-row"><span class="readonly-label">姓名</span><span class="readonly-value">张三</span></div>
+  <div class="readonly-row"><span class="readonly-label">学号/工号</span><span class="readonly-value">S20230156</span></div>
+  <div class="readonly-row"><span class="readonly-label">单位</span><span class="readonly-value">计算机学院</span></div>
+  <div class="form-group" style="padding-top:8px">
+    <div class="form-label">班级/科室</div>
+    <input type="text" placeholder="例：软件2301 / 学工办（选填）">
+  </div>
+  <div class="form-group">
+    <div class="form-label"><span class="req">*</span>身份</div>
+    <select required>
+      <option value="">请选择</option>
+      <option value="student" selected>学生</option>
+      <option value="teacher">老师</option>
+    </select>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">用章信息</div>
+
+  <div class="form-group">
+    <div class="form-label"><span class="req">*</span>申请印章</div>
+    <select required>
+      <option value="">请选择需要申请的印章</option>
+      <option>学生工作部公章（学工部）</option>
+      <option>计算机学院公章（计算机学院）</option>
+      <option>文学院公章（文学院）</option>
+      <option>自动化学院公章（自动化学院）</option>
+      <option>数学学院公章（数学学院）</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <div class="form-label"><span class="req">*</span>用印日期</div>
+    <input type="date" required>
+  </div>
+  <div class="form-group">
+    <div class="form-label"><span class="req">*</span>材料落款日期</div>
+    <input type="date" required>
+  </div>
+
+  <div class="form-group">
+    <div class="form-label"><span class="req">*</span>盖章内容</div>
+    <textarea placeholder="请描述需要盖章的文件内容" required></textarea>
+  </div>
+
+  <div class="form-group">
+    <div class="form-label"><span class="req">*</span>份数</div>
+    <input type="number" placeholder="请输入份数" required>
+  </div>
+
+  <div class="form-group">
+    <div class="form-label"><span class="req">*</span>用印人</div>
+    <input type="text" value="张三" required>
+  </div>
+
+  <div class="form-group">
+    <div class="form-label"><span class="req">*</span>用印人联系方式</div>
+    <input type="tel" placeholder="11 位手机号" required>
+  </div>
+
+  <div class="form-group">
+    <div class="form-label"><span class="req">*</span>用印单位</div>
+    <select required>
+      <option value="">请选择</option>
+      <option>计算机学院</option>
+      <option>文学院</option>
+      <option>自动化学院</option>
+      <option>数学学院</option>
+      <option>学生工作部</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <div class="form-label">备注</div>
+    <textarea placeholder="备注说明（可选）"></textarea>
+  </div>
+
+  <div class="form-group">
+    <div class="form-label">附件</div>
+    <div class="upload-area">
+      <div class="upload-icon">📎</div>
+      <div class="upload-text">点击或拖拽上传附件</div>
+      <div class="upload-hint">支持 PDF/Word/Excel/图片，单个文件不超过 20MB</div>
+      <div class="upload-notice">不适合线上审批的盖章材料，请走线下审批手续</div>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-bar">
+  <a class="btn-submit" href="04-submit-success.html">提交申请</a>
+</div>
+<nav class="tab-bar">
+  <a class="active" href="01-apply-form.html"><span class="ticon">📝</span>用印申请</a>
+  <a href="02-my-applications.html"><span class="ticon">📄</span>我的申请</a>
+</nav>
+
+</body>
+</html>
